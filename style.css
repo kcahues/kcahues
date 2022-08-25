@@ -1,0 +1,158 @@
+*{
+    margin: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    
+}
+html{
+    background: #000;
+}
+.hpadre{
+    display: flex;
+    flex-flow: column nowrap;
+    background: linear-gradient(207.8deg, #554e48 16.69%, #2baefa 100%);
+}
+.header{
+    background: transparent;
+    display: flex;
+    flex-flow: column nowrap;
+}
+    .menu{
+        background: transparent;
+        display: flex;
+        flex-flow: row nowrap;
+        height: 100px;
+        align-items: center;
+
+        
+    }
+        .logo{
+            background: transparent;
+            flex: 1 1 auto;
+            height: 50px;
+            justify-content: right;
+            display: flex;
+            flex-flow: row nowrap;
+
+        }
+            .material-icons{
+                padding: 0%;
+                margin: 0%;
+                font-size:4rem;
+                color:white;
+                background:transparent;
+            }
+            h3{
+                color: white;
+                background:transparent;
+            }
+        .nav{
+            background: transparent;
+            flex: 5 1 auto;
+            height: 50px;
+            display: flex;
+            flex-flow: row nowrap;
+            background: linear-gradient(207.8deg, #554e48 16.69%, #2baefa 100%);
+            border-radius: 5px;
+        }
+            a{
+                
+                margin: 0%;
+                width: 15em;
+                width: auto;
+                
+                font-size: 1em;
+                color: white;
+                /*width: 100px;*/
+    /*            padding: 12px 16px;*/
+                text-decoration: none;
+                display: block;
+                background-color: transparent;
+                transition: background-color .5s;
+            }
+            a:hover {
+                background: linear-gradient(207.8deg, #96887c 16.69%, #68a4c7 100%);
+            }
+
+    .presentacion{
+        background: #002B5B;
+        
+    }
+        h1{
+           background: #3FA796;  
+        }
+.section{
+    background: transparent;
+    display: flex;
+}
+    .articulos{
+        background: transparent;
+        display: flex;
+        flex: 2 1 auto;
+        flex-flow: row wrap;
+        border-radius: 5px;
+    }
+        .article{
+            background: #256D85;
+            flex: 1 1 40%;
+            border-radius: 5px;
+            color: white;
+        }
+        .navegar{
+            background: #8FE3CF;
+            flex: 1 1 100%;
+        }
+    .aside{
+        background: transparent;
+        flex: 1 1 auto;
+    }
+        .videos{
+            background: transparent;
+        }
+.footer{
+    background: #000;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+}
+    .pie{
+
+        width: 300px;
+        color: white;
+    }
+
+    @media all and (max-width: 800px){
+        .section{
+            flex-direction: column;
+        }
+        .menu{
+            flex-direction: column;
+            height: auto;
+        }
+        .aside{
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    @media all and (max-width: 600px){
+        .articulos{
+            flex-direction: column;
+            
+        }
+        h1{
+            font-size: 20px;
+        }
+    }
+
+    @media all and (max-width: 400px){
+        .aside{
+            flex-direction: column;
+        }
+        a{
+            margin-left: 5px;
+        }
+        h1{
+            font-size: 15px;
+        }
+    }
