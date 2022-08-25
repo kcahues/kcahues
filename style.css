@@ -94,7 +94,7 @@ html{
     }
         .article{
             background: #256D85;
-            flex: 1 1 40%;
+            flex: 5 1 40%;
             border-radius: 5px;
             color: white;
         }
@@ -104,10 +104,15 @@ html{
         }
     .aside{
         background: transparent;
-        flex: 1 1 auto;
+        flex: 1 1 20%;
+        flex-flow: row wrap;
     }
         .videos{
             background: transparent;
+        }
+        video{
+            width: 320px;
+            height: 240px;
         }
 .footer{
     background: #000;
@@ -142,6 +147,10 @@ html{
         }
         h1{
             font-size: 20px;
+        }
+        video{
+            width: 200px;
+            height: 120px;
         }
     }
 
