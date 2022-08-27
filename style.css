@@ -12,6 +12,10 @@ html{
     flex-flow: column nowrap;
     background: linear-gradient(207.8deg, #554e48 16.69%, #2baefa 100%);
 }
+
+li{
+    list-style:none;
+}
 .header{
     background: transparent;
     display: flex;
@@ -94,9 +98,10 @@ html{
     }
         .article{
             background: #256D85;
-            flex: 5 1 40%;
+            flex: 5 1 25%;
             border-radius: 5px;
             color: white;
+            align-items: center;
         }
         .navegar{
             background: #8FE3CF;
