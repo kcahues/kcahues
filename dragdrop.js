@@ -1,88 +1,101 @@
-$('.item') 
-    .bind('dragstart', function (evt) { 
-        evt.dataTransfer.setData('text', this.id); 
-        $('h2').fadeIn('fast'); 
-    }) 
-    .hover( 
-        function () { $('div', this).fadeIn(); },  
-        function () { $('div', this).fadeOut(); } 
-    );
-
-    $('#cart') 
-    .bind('dragover', function (evt) { 
-        evt.preventDefault(); 
-    }) 
-    .bind('dragenter', function (evt) { 
-        evt.preventDefault(); 
-    }) 
-    .bind('drop', function (evt) { 
- 
-    });
-
-
-    var id = evt.dataTransfer.getData('text'), 
-    item = $('#' + id), 
-    cartList = $("#cart ul"), 
-    total = $("#total span"), 
-    price = $('p:eq(1) span', item).text(), 
-    prevCartItem = null, 
-    notInCart = (function () { 
-        var lis = $('li', cartList), 
-            len = lis.length, 
-            i; 
- 
-        for (i = 0; i < len; i++ ) { 
-            var temp = $(lis[i]); 
-            if (temp.data("id") === id) { 
-                prevCartItem = temp; 
-                return false; 
-            } 
-        } 
-        return true; 
-    } ()), 
-    quantLeftEl, quantBoughtEl, quantLeft;
-
-    $("h2").fadeOut('fast'); 
- 
-if (notInCart) { 
-    prevCartItem = $('<li />', { 
-        text : $('p:first', item).text(), 
-        data : { id : id } 
-    }).prepend($('<span />', { 
-        'class' : 'quantity', 
-        text : '0' 
-    })).prepend($('<span />', { 
-        'class' : 'price', 
-        text : price 
-    })).appendTo(cartList); 
+function addEvent(element, event, delegate ) {
+    if (typeof (window.event) != 'undefined' && element.attachEvent)
+        element.attachEvent('on' + event, delegate);
+    else 
+        element.addEventListener(event, delegate, false);
 }
 
-quantLeftEl = $('p:last span', item); 
-quantLeft   = parseInt(quantLeftEl.text(), 10) - 1; 
-quantLeftEl.text(quantLeft); 
-quantBoughtEl = $('.quantity', prevCartItem); 
-quantBoughtEl.text(parseInt(quantBoughtEl.text(), 10) + 1); 
- 
-if (quantLeft === 0) { 
-    item.fadeOut('fast').remove(); 
-} 
- 
-total.text((parseFloat(total.text(), 10) + parseFloat(price.split('$')[1])).toFixed(2)); 
- 
-evt.stopPropagation(); 
-return false;
+addEvent(document, 'readystatechange', function() {
+    if ( document.readyState !== "complete" ) 
+        return true;
+        
+    var items = document.querySelectorAll("section.products ul li");
+    var cart = document.querySelectorAll("#cart ul")[0];
+    
+    function updateCart(){
+        var total = 0.0;
+        var cart_items = document.querySelectorAll("#cart ul li")
+        for (var i = 0; i < cart_items.length; i++) {
+            var cart_item = cart_items[i];
+            var quantity = cart_item.getAttribute('data-quantity');
+            var price = cart_item.getAttribute('data-price');
+            
+            var sub_total = parseFloat(quantity * parseFloat(price));
+            cart_item.querySelectorAll("span.sub-total")[0].innerHTML = " = " + sub_total.toFixed(2);
+            
+            total += sub_total;
+        }
+        
+        document.querySelectorAll("#cart span.total")[0].innerHTML = total.toFixed(2);
+    }
+    
+    function addCartItem(item, id) {
+        var clone = item.cloneNode(true);
+        clone.setAttribute('data-id', id);
+        clone.setAttribute('data-quantity', 1);
+        clone.removeAttribute('id');
+        
+        var fragment = document.createElement('span');
+        fragment.setAttribute('class', 'quantity');
+        fragment.innerHTML = ' x 1';
+        clone.appendChild(fragment);	
+        
+        fragment = document.createElement('span');
+        fragment.setAttribute('class', 'sub-total');
+        clone.appendChild(fragment);					
+        cart.appendChild(clone);
+    }
+    
+    function updateCartItem(item){
+        var quantity = item.getAttribute('data-quantity');
+        quantity = parseInt(quantity) + 1
+        item.setAttribute('data-quantity', quantity);
+        var span = item.querySelectorAll('span.quantity');
+        span[0].innerHTML = ' x ' + quantity;
+    }
+    
+    function onDrop(event){			
+        if(event.preventDefault) event.preventDefault();
+        if (event.stopPropagation) event.stopPropagation();
+        else event.cancelBubble = true;
+        
+        var id = event.dataTransfer.getData("Text");
+        var item = document.getElementById(id);			
+                    
+        var exists = document.querySelectorAll("#cart ul li[data-id='" + id + "']");
+        
+        if(exists.length > 0){
+            updateCartItem(exists[0]);
+        } else {
+            addCartItem(item, id);
+        }
+        
+        updateCart();
+        
+        return false;
+    }
+    
+    function onDragOver(event){
+        if(event.preventDefault) event.preventDefault();
+        if (event.stopPropagation) event.stopPropagation();
+        else event.cancelBubble = true;
+        return false;
+    }
 
-$('#cart').bind('dragleave', function (evt) { 
-	console.log('dragleave'); 
-}); 
- 
-$('.item') 
-	.bind('dragend', function (evt) { 
-		console.log('dragend'); 
-	}) 
-	.bind('dragstart', function (evt) { 
-		console.log('dragstart'); 
-	}) 
-	.bind('drag', function (evt) { 
-		console.log('drag'); 
-	});
+    addEvent(cart, 'drop', onDrop);
+    addEvent(cart, 'dragover', onDragOver);
+    
+    function onDrag(event){
+        event.dataTransfer.effectAllowed = "move";
+        event.dataTransfer.dropEffect = "move";
+        var target = event.target || event.srcElement;
+        var success = event.dataTransfer.setData('Text', target.id);
+    }
+        
+    
+    for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        item.setAttribute("draggable", "true");
+        addEvent(item, 'dragstart', onDrag);
+    };
+});

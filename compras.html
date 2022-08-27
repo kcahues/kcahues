@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="style.css">
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
+    <script src="jquery.ndd.js"></script> 
+    <script src="dragdrop.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -35,28 +37,31 @@
             </div>
         </header>
          
-            <section class="section">
-                <div id="cart">
-                <h1>Carrito de compras</h1> 
-                <ul></ul> 
-                <p id="total"><strong>Total:</strong> $<span>0.00</span></p> 
-                <hr /><h2>Deposita aqui </h2> 
-            </div>
-            </section>
+        <section id="cart" class="shopping-cart">
+            <ul>
+            </ul>
+            <span class="total">0.00</span>
+        </section>
             
         <section class="section">
             <div class="articulos">
                 
                 <article class="article">
-                    <li><a class="item" href="#" id="imac" draggable="true"> 
+                    <section id="products" class="products">
+                        <ul>
+                    <li id="product-1" data-price="3000.00"><span>Product 1</span><a class="item" href="#"  draggable="true"> 
                         <img src="assets/poco.png" /> 
                         <div> 
                             <p><strong>Xiaomi Poco X3 Pro</strong></p> 
                             <p><strong>Price</strong>: <span>Q3000.00</span></p>  
                         </div> 
                     </a></li>
+                </ul>
+                </section>
                 </article>
                 <article class="article">
+                    <section id="products" class="products">
+                        <ul>
                     <li><a class="item" href="#" id="iphone13" draggable="true"> 
                         <img src="assets/iphone13a.png" /> 
                         <div> 
@@ -64,6 +69,8 @@
                             <p><strong>Price</strong>: <span>Q11500.00</span></p>  
                         </div> 
                     </a></li>
+                </ul>
+            </section>
                 </article>
                 <article class="article">
                     <li><a class="item" href="#" id="samsungs22" draggable="true"> 
@@ -112,8 +119,6 @@
 
         </footer>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
-    <script src="jquery.ndd.js"></script> 
-    <script src="dragdrop.js"></script>
+    
 </body>
 </html>
