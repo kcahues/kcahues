@@ -10,8 +10,30 @@
     <script src="jquery.ndd.js"></script> 
     <script src="dragdrop.js"></script>
     <title>Document</title>
+    <script type="text/javascript">
+        obtenerLocalizacion();
+
+        function obtenerLocalizacion() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(mostrarPosicion);
+		} else { 
+			alert('La Geolocalizacion no esta soportada por el navegador');
+		}
+	}
+
+	function mostrarPosicion(position) {
+		$('#localizacion').html('Latitud: ' + position.coords.latitude + ', Longitud: ' + position.coords.longitude);
+		$.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+position.coords.latitude+','+position.coords.longitude+'&key=AIzaSyCI64jhc_Q6dO10q7P6TRXDbY4V7PFULHU',
+             success: function(data){
+                 console.log('success',data);
+                 var pais = data.results[0].address_components[6].long_name;
+                 $('#localizacion').html(', ' + pais);
+             }
+		});
+	}
+    </script>
 </head>
-<body>
+<body >
     
     <div class="hpadre">
         <header class="header">
@@ -19,7 +41,7 @@
                 <nav class="nav">
                     
                         <a href="index.html">Inicio</a>
-                        <a href="#">Compras</a>
+                        <a href="#" >Compras</a>
                         <a href="#">Confirma</a>
             
 
@@ -36,7 +58,10 @@
             
             </div>
         </header>
-         
+        <h1>Compra</h1>
+        
+         <h1 id="localizacion"></h1>
+
         <section id="cart" class="shopping-cart">
             <ul>
             </ul>
@@ -49,8 +74,9 @@
                 <article class="article">
                     <section id="products" class="products">
                         <ul>
-                    <li id="product-1" data-price="3000.00"><span>Product 1</span><a class="item" href="#"  draggable="true"> 
-                        <img src="assets/poco.png" /> 
+                    <li id="product-1" data-price="3000.00" draggable="true">
+                        <a class="item" href="#"  draggable="true"> 
+                        <img src="assets/poco.png" id="product-1"/> 
                         <div> 
                             <p><strong>Xiaomi Poco X3 Pro</strong></p> 
                             <p><strong>Price</strong>: <span>Q3000.00</span></p>  
@@ -62,8 +88,9 @@
                 <article class="article">
                     <section id="products" class="products">
                         <ul>
-                    <li><a class="item" href="#" id="iphone13" draggable="true"> 
-                        <img src="assets/iphone13a.png" /> 
+                            <li id="product-2" data-price="11500.00" draggable="true">
+                                <a class="item" href="#"  draggable="true"> 
+                        <img src="assets/iphone13a1.png" id="product-2"/> 
                         <div> 
                             <p><strong>iPhone 13 Pro Max</strong></p> 
                             <p><strong>Price</strong>: <span>Q11500.00</span></p>  
@@ -73,40 +100,60 @@
             </section>
                 </article>
                 <article class="article">
-                    <li><a class="item" href="#" id="samsungs22" draggable="true"> 
-                        <img src="assets/samsungs22.webp" /> 
+                    <section id="products" class="products">
+                    <ul>
+                        <li id="product-3" data-price="14500.00" draggable="true">
+                            <a class="item" href="#" id="samsungs22" draggable="true"> 
+                        <img src="assets/samsungs22.webp" id="product-3"/> 
                         <div> 
                             <p><strong>Samsung S22</strong></p> 
                             <p><strong>Price</strong>: <span>Q14500.00</span></p>  
                         </div> 
                     </a></li>
+                </ul>
+            </section>
                 </article>
                 <article class="article">
-                    <li><a class="item" href="#" id="huawei" draggable="true"> 
-                        <img src="assets/huawei.png" /> 
+                    <section id="products" class="products">
+                        <ul>
+                            <li id="product-4" data-price="8000.00" draggable="true">
+                                <a class="item" href="#" id="huawei" draggable="true"> 
+                        <img src="assets/huawei.png" id="product-4"/> 
                         <div> 
                             <p><strong>Huawei P50 Pro</strong></p> 
                             <p><strong>Price</strong>: <span>Q8000.00</span></p>  
                         </div> 
                     </a></li>
+                </ul>
+            </section>
                 </article>
                 <article class="article">
-                    <li><a class="item" href="#" id="sony" draggable="true"> 
-                        <img src="assets/sony.png" /> 
+                    <section id="products" class="products">
+                        <ul>
+                            <li id="product-5" data-price="5000.00" draggable="true">
+                    <a class="item" href="#" id="sony" draggable="true"> 
+                        <img src="assets/sony.png" id="product-5" /> 
                         <div> 
                             <p><strong>Sony Xperia XZ1</strong></p> 
                             <p><strong>Price</strong>: <span>Q5000.00</span></p>  
                         </div> 
                     </a></li>
+                </ul>
+            </section>
                 </article>
                 <article class="article">
-                    <li><a class="item" href="#" id="oppo" draggable="true"> 
-                        <img src="assets/oppo.png" /> 
+                    <section id="products" class="products">
+                        <ul>
+                            <li id="product-6" data-price="3200.00" draggable="true">
+                                <a class="item" href="#" id="oppo" draggable="true"> 
+                        <img src="assets/oppo.png" id="product-6"/> 
                         <div> 
                             <p><strong>Oppo Reno 7</strong></p> 
                             <p><strong>Price</strong>: <span>Q3200.00</span></p>  
                         </div> 
                     </a></li>
+                </ul>
+            </section>
                 </article>
                 
             </div>

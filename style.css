@@ -212,10 +212,15 @@ li{
         padding: 0px;
         cursor: pointer;
     }
+    section#cart{
+        background: linear-gradient(207.8deg, #96887c 16.69%, #68a4c7 100%);
+    }
     section#cart ul{
-        height: 200px;			
+        height: 600px;	
+        width: 450px;		
         overflow: auto;
-        background-color: #cccccc;
+        background: linear-gradient(207.8deg, #96887c 16.69%, #68a4c7 100%);
+        /*background-color: #cccccc;*/
     }
     @media all and (max-width: 800px){
         .section{
@@ -243,6 +248,14 @@ li{
             width: 315px;
             height: 164px;
         }
+        img{
+            width: 200px;
+            height: 200px;
+        }
+        section#cart ul{
+            height: 300px;	
+            width: 250px;	
+    }
     }
 
     @media all and (max-width: 400px){
@@ -264,6 +277,7 @@ li{
         *{
             margin: 0%;
         }
+        
         .section .videos .articulos{
             margin: 0%;
             padding: 0%;
@@ -272,7 +286,10 @@ li{
             width: 200px;
             height: 200px;
         }
+        section#cart ul{
+            height: 300px;	
+            width: 250px;	
     }
-
+    }
  
   
